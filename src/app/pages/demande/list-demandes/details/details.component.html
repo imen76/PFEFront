@@ -1,0 +1,384 @@
+<body class="my-login-page">
+    <app-page-layout></app-page-layout>
+    <div class="content-wrapper">
+        <div class="row mb-2">
+
+            <div class="table-responsive" *ngIf="serviceUser.user.libelleRole == 'Demandeur'">
+                <div class="container">
+                    <mat-toolbar-row style="    display: block;">
+                        <span class="fill-remaining-space">
+
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item">
+
+                                    <!-- <button type="button" class="btn btn-info" routerLink="/add"> <i
+                                            class="fas fa-plus"></i>
+                                        Ajouter
+                                    </button> -->
+                                </li>
+                                <li class="nav-item">
+                                    <!-- <button type="button" class="btn btn-info" routerLink="/parametres"> Paramètres Demande
+                        </button> -->
+                                    <a href="/parametres" style="color:#070707;">Paramètres Demande</a>
+                                </li>
+
+
+
+
+                            </ul>
+                        </span>
+                    </mat-toolbar-row>
+
+                </div>
+            </div>
+
+            <div class="card card-info mt-3">
+
+                <!-- <h3 class="card-title">Liste Employés</h3> -->
+                <div class="card-header ui-sortable-handle" style="cursor: move;">
+                    <h3 class="card-title">
+                        <i class="far fa-file-alt ml-2"></i>
+                        Liste Demande En Cours
+                    </h3>
+                    <div class="card-tools" *ngIf="serviceUser.user.libelleRole=='Demandeur'">
+                        <ul class="nav nav-pills ml-auto">
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-block btn-secondary"
+                                    routerLink="/add">Ajouter</button>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- <mat-toolbar color="accent">
+                <i class="fas fa-home"></i>&nbsp;
+                <div style="width: -webkit-fill-available;">
+                    <h3>Demandes</h3>
+
+                </div>
+
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-info active">
+                        <input type="radio" name="status" value="all" checked="checked"> All
+                    </label>
+                    <label class="btn btn-success">
+                        <input type="radio" name="status" value="Done"> Done
+                    </label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="status" value="En-cours"> En cours
+                    </label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="status" value="Expirer"> Expirer
+                    </label>
+                </div>
+            </mat-toolbar> -->
+
+
+            <div class="card-body table-responsive mt-3" *ngIf="serviceDemandeState.ListStateDemandeByRole.length>0">
+                <table class="table table-striped table-bordered" style="margin-left: -5px;">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Demande </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Date</th>
+
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Filiale</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Client</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Categorie</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Mode</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Motif Demande</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Crée Par</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder" *ngIf="serviceUser.user.libelleRole != 'Demandeur'" >Commentaire</th>
+                            <th class="text-center" *ngIf="serviceUser.user.libelleRole != 'Demandeur'" colspan="3">
+                                Action</th>
+
+                            <th class="text-right" *ngIf="serviceUser.user.libelleRole=='Demandeur'">Edit</th>
+                            <th class="text-right" *ngIf="serviceUser.user.libelleRole=='Demandeur'">Delete</th>
+                            <!---->
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr
+                            *ngFor="let dde of serviceDemandeState.ListStateDemandeByRole   |paginate: { itemsPerPage: 5,currentPage: p}; let i =index;">
+                          
+                            <td>{{dde.labelDemande}}   </td>
+                            <td>{{dde.dateDemande | date: "dd/MM/yyyy"}}</td>
+
+                            <td>{{dde.partie1}}</td>
+
+                            <td>{{dde.partie2}}</td>
+                            <td>{{dde.typeCat}}</td>
+                            <td>{{dde.designation}}</td>
+                            <td>{{dde.comment}}</td>
+                            <td>{{dde.fullName}}</td>
+                            <td *ngIf="serviceUser.user.libelleRole != 'Demandeur'" >{{dde.comment}}</td>
+
+                            <td *ngIf="serviceUser.user.libelleRole != 'Demandeur'">
+                                <form [formGroup]="serviceDemandeState.formComment">
+                                    <div class="form-group mt-3">
+
+                                        <textarea formControlName="comment" type="text" class="form-control" id="Comment"
+                                            placeholder="Saisir Commentaire" name="Comment" required minlength="2"
+                                            autocomplete="off"></textarea>
+                                    </div>
+                                </form>
+                            </td>
+                            <td *ngIf="serviceUser.user.libelleRole != 'Demandeur'">
+                                <button type="button" (click)="onRevise(dde)" class="btn btn-outline-danger">Reviser</button>
+                            </td>
+
+                            <td *ngIf="serviceUser.user.libelleRole != 'Demandeur' ">
+                                <button type="button" (click)="onAccept(dde)" class="btn btn-success float-right"
+                                *ngIf="serviceUser.user.libelleRole != 'Directeur Siege' ">Accepter</button>
+                                <button type="button" (click)="onAccept(dde)" class="btn btn-success float-right"
+                                *ngIf="serviceUser.user.libelleRole == 'Directeur Siege' ">Cloturer</button>
+
+                            </td>
+
+
+                            <td class="text-right" *ngIf="serviceUser.user.libelleRole=='Demandeur' " >
+                            
+                                <span [hidden]="dde.fkUser != serviceUser.user.userId">
+                                    <i   class="fas fa-edit text-primary" ></i>
+                                </span>    
+                                       
+                               
+                            </td>
+
+                            <td class="text-right" *ngIf="serviceUser.user.libelleRole=='Demandeur'" >
+
+                                <span [hidden]="dde.fkUser != serviceUser.user.userId">
+                                    <i   class="fas fa-trash text-danger" ></i>
+                                </span>
+                                <!-- <div _ngcontent-hba-c81="" class="tools" >
+
+                                    <button style="    color: #ca0101;" type="button" class="btn btn-sm" rel="tooltip"
+                                        (click)="OnDelete()">
+                                        <mat-icon>delete_outline</mat-icon>
+                                    </button>
+                                </div> -->
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <!-- <div class="card-footer mt-3" *ngIf="serviceUser.user.libelleRole !='Demandeur'">
+
+                    <form [formGroup]="formComment" >
+                        <div class="form-group mt-3">
+                            <label>Commentaire</label>
+                            <input formControlName="comment" type="text" class="form-control" id="Comment" placeholder="Saisir Commentaire"
+                              name="Comment" required minlength="2" autocomplete="off">
+                          </div>
+                        </form>
+                    <button type="button" class="btn btn-outline-danger">Reviser</button>
+                  
+                    <button type="button" class="btn btn-success float-right">Accepter</button>
+                  </div> -->
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+            </div>
+
+            <div class="alert alert-secondary mx-auto text-center mt-5 col-md-6" role="alert"
+                *ngIf="serviceDemandeState.ListStateDemandeByRole.length==0">
+                Aucune Liste à Afficher
+            </div>
+
+            <!-- <pagination-controls (pageChange)="pageChanged($event)" previousLabel = 'Précédent' nextLabel="Suivant"></pagination-controls> -->
+
+            <!-- Modal -->
+            <!-- 
+                    
+                            <ng-template #contentEdit let-modal>
+
+                                <div class="card-edit modal-header">
+                                    <h4 class="modal-title" id="modal-basic-title">Modifier une demande</h4>
+                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                              
+                                <div class="modal-body">
+                                    <form [formGroup]="demandeService.demandeForm">
+                              <div >
+                                        
+                                  
+                                        
+                                      <div class="form-group row" >
+                                        <label for="Lieu" class="col-sm-3 col-form-label" id="Lieu" >
+                                            Lieu</label>
+                                        <div class="col-sm-9">
+                                          <input formControlName="Lieu" id="Lieu" name="Lieu" type="text" placeholder="Lieu" required [value]="demandeService.demandeForm.controls.Lieu.value" >
+                                        </div>
+                                      </div>
+                              
+                                      <div class="form-group row" >
+                                        <label for="Partie1" class="col-sm-3 col-form-label" id="Partie1" >
+                                            Partie1</label>
+                                        <div class="col-sm-9">
+                                          <input formControlName="Partie1"  id="Partie1" name="Partie1" type="text" placeholder="Partie1" required [value]="demandeService.demandeForm.controls.Partie1.value" >
+                                        </div>
+                                      </div>
+                                        
+                                      <div class="form-group row" >
+                                        <label for="Partie2" class="col-sm-3 col-form-label" id="Partie2" >
+                                            Partie2</label>
+                                        <div class="col-sm-9">
+                                          <input formControlName="Partie2"   id="Partie2" name="Partie2" type="text" placeholder="Partie2" required [value]="demandeService.demandeForm.controls.Partie2.value" >
+                                        </div>
+                                      </div>
+                                    </div>
+                                    </form>
+                                </div>
+                              
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-outline-dark"  >Valider</button>
+                              </div>
+                              
+                              </ng-template>
+                              
+ -->
+
+
+            <!-- Modal modifier demande
+                    <ng-template #contentEdit let-modal>
+
+                    <div class="modal fade" id="modifierModal" tabindex="-1" role="dialog" aria-labelledby="modifierModalLabel" aria-hidden="true">
+                        <div class="modal-dialog"  >
+                            <div class="modal-content">
+                                <div class="card card-info">
+                                    <div class="card-header" style="text-align:center;">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                        <h3 class="modal-title" id="modifierModalLabel">Modifier une demande</h3>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+
+                                   <form>
+                                       
+                    <div class="form-group">
+                        <label>type</label>
+                        <input type="text" class="form-control" id="TypeDemande" placeholder="Saisir le lieu" name="Lieu" required maxlength="6" minlength="14">
+                    </div>
+                    <div class="form-group">
+                        <label >Date Demande</label>
+                        <input type="date"  formControlName="DateDemande"  class="form-control" id="DateDemande" placeholder="Saisir date demande" name="dateDemande" required minlength="14">
+                    </div>
+                   
+                 
+                    <div class="form-group">
+                        <label>Lieu</label>
+                        <input  formControlName="Lieu" type="text" class="form-control" id="Lieu" placeholder="Saisir le lieu" name="Lieu" required maxlength="6" minlength="14">
+                    </div>
+                    <div class="form-group">
+                        <label>Client</label>
+                        <input type="text"  formControlName="Partie1" class="form-control" id="Partie1" placeholder="Saisir partie1" name="Partie1">
+                    </div>
+                    <div class="form-group">
+                        <label>Fournisseur</label>
+                        <input type="text"   formControlName="Partie2"class="form-control" id="Partie2" placeholder="Saisir partie2" name="Partie2">
+                    </div>
+                 
+ 
+                <div class="float-center">
+                    <button type="submit"  class="btn btn-primary" style="width: -webkit-fill-available;">Modifier</button>
+                </div>
+                                   </form>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </ng-template> -->
+            <!-- //Modal modifier demande 
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+            <!-- Modal Edit demande-->
+            <ng-template #contentEdit let-modal>
+
+                <div class="modal-header btn btn-info">
+                    <h4 class="modal-title" id="modal-basic-title-2">Update demande</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="editForm" novalidate>
+
+                        <div class="form-group">
+                            <label for="demandeId">demandeId</label>
+                            <div class="input-group">
+                                <input formControlName="demandeId" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="typeDemande">Libellé</label>
+                            <div class="input-group">
+                                <input formControlName="typeDemande" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateDemande">dateDemande</label>
+                            <div class="input-group">
+                                <input formControlName="dateDemande" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="lieu">lieu</label>
+                            <div class="input-group">
+                                <input formControlName="lieu" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="partie1">partie1</label>
+                            <div class="input-group">
+                                <input formControlName="partie1" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="partie2">partie2</label>
+                            <div class="input-group">
+                                <input formControlName="partie2" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="border text-center">
+                    <button data-dismiss="modal" class="btn btn-info" (click)="onSave()">Save Changes</button>
+                </div>
+
+            </ng-template>
+
+            <!-- </div> -->
+
+            <!-- <form [formGroup]="demandeStateServiceService.addDocumentstateForm">  
+
+                <div class="form-group">
+        
+                  <input class="form-control" formControlName="IdDemandeState" type="hidden"  >
+        
+                   <!-- <textarea class="form-control" rows="3" placeholder="Commentaire ..." formControlName="Comment"></textarea> -->
+
+            <!-- <input class="form-control" formControlName="Comment" >
+        
+                    <button type="button" class="btn btn-secondary float-right" (click)="Post()" >Envoyer</button>  
+        
+                </div> -->
+
+            <!-- </form> -->
+            

@@ -1,0 +1,62 @@
+<div class="content-wrapper">
+    <div class="form-steps-container">
+        <ng-container *ngFor="let step of steps | async; let i = index;">
+            <div (click)="onStepClick(step)"
+                [ngClass]="{ 'step-complete': step.isComplete, 'step-incomplete': !step.isComplete, 'step-current': (currentStep | async)?.stepIndex === step.stepIndex }"
+                class="step-bubble">{{ step.stepIndex }}</div>
+            <div class="step-divider"></div>
+        </ng-container>
+    </div>
+
+    <div class="step-template">
+        <h2>Step {{ step.stepIndex }}</h2>
+        <div class="step-content-label" *ngIf="step.stepIndex==1">
+            <p>
+                étape 1
+            </p>
+            <select name="pets" id="pet-select">
+                <option value="">--Please choose an option--</option>
+                <option value="dog">Valid1@gmail.com</option>
+                <option value="cat">Valid2@gmail.com</option>
+                <option value="hamster">Valid3@gmail.com</option>
+                <option value="parrot">Valid4@gmail.com</option>
+                
+            </select>
+            <!-- <input type="text" name="nomv" placeholder="rtrrr"> -->
+        </div>
+        <div class="step-content-label" *ngIf="step.stepIndex==2">
+            <p>
+                étape 2
+            </p>
+            <select name="pets" id="pet-select">
+                <option value="">--Please choose an option--</option>
+                <option value="dog">Valid1@gmail.com</option>
+                <option value="cat">Valid2@gmail.com</option>
+                <option value="hamster">Valid3@gmail.com</option>
+                <option value="parrot">Valid4@gmail.com</option>
+                <!-- <option value="spider">Valid5@gmail.com</option>
+                <option value="goldfish">Valid6@gmail.com</option> -->
+            </select>
+        </div>
+        <div class="step-content-label" *ngIf="step.stepIndex==3">
+            <p>
+                étape 3
+            </p>
+            <select name="pets" id="pet-select">
+                <option value="">--Please choose an option--</option>
+                <option value="dog">Valid1@gmail.com</option>
+                <option value="cat">Valid2@gmail.com</option>
+                <option value="hamster">Valid3@gmail.com</option>
+                <option value="parrot">Valid4@gmail.com</option>
+                <!-- <option value="spider">Valid5@gmail.com</option>
+                <option value="goldfish">Valid6@gmail.com</option> -->
+            </select>
+        </div>
+
+        <button class="step-complete-btn" (click)="onCompleteStep()">
+            <span class="completed-step-check material-icons">
+                {{ step.isComplete ? 'check_circle' : 'panorama_fish_eye' }}
+            </span>Complete Step {{ step.stepIndex }}</button>
+        
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<body class="my-login-page">
+  <app-page-layout></app-page-layout>
+  <div class="content-wrapper">
+      <div class="row mb-2">
+          <div class="card card-info mt-3">
+              <div class="card-header ui-sortable-handle" style="cursor: move;">
+                  <h3 class="card-title">
+                      <i class="far fa-file-alt ml-2"></i>
+                      Liste Historique Demande
+                  </h3>
+              </div>
+          </div>
+
+          <form [formGroup]="serviceDemandeState.formHistorique">
+
+            <div class="form-group row">
+                <!-- <label  class="col-sm-2 col-form-label col-form-label-sm">Choisir Demande</label> -->
+                <div class="col-md-6 mx-auto">
+                    <ng-select [items]="newList" bindLabel="labelDemande" bindValue="demandeId" [multiple]="false"
+                    placeholder="Select Demande" formControlName="fkDemande"
+                    (change)="GetList()">
+                  </ng-select>                </div>
+              </div>
+
+        </form>
+     
+          <div class="card-body table-responsive mt-3" *ngIf="serviceDemandeState.HistoriqueStateDemande.length>0">
+              <table class="table table-striped table-bordered" style="margin-left: -5px;">
+                  <thead>
+                      <tr>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Demande </th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Date</th>
+
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Filiale</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Client</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Categorie</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Mode</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Gérer Par</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder" >Commentaire</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Etat</th>
+                      </tr>
+                  </thead>
+
+                  <tbody>
+                      <tr
+                          *ngFor="let dde of serviceDemandeState.HistoriqueStateDemande   |paginate: { itemsPerPage: 25,currentPage: p}; let i =index;">
+                        
+                          <td>{{dde.labelDemande}}   </td>
+                          <td>{{dde.dateDemande | date: "dd/MM/yyyy"}}</td>
+
+                          <td>{{dde.partie1}}</td>
+
+                          <td>{{dde.partie2}}</td>
+                          <td>{{dde.typeCat}}</td>
+                          <td>{{dde.designation}}</td>
+                          <td>{{dde.fullName}} <span class="badge badge-pill badge-light">{{dde.libelleRole}}</span></td>
+                          <td>{{dde.comment}}</td>
+                          <td>
+                            
+                            <span class="badge badge-pill badge-secondary" *ngIf="dde.stateDemande=='En Cours' && dde.isAccepted ==false && dde.isModified == false">En Cours</span>
+
+                            <span class="badge badge-pill badge-primary" *ngIf="dde.stateDemande == 'En Cours' && dde.isAccepted == true && dde.isModified == false">Acceptée</span>
+
+                            <span class="badge badge-pill badge-warning" *ngIf="dde.stateDemande == 'En Cours' && dde.isAccepted == false && dde.isModified == true">En Cours de Revision</span>
+                            <span class="badge badge-pill badge-info" *ngIf="dde.stateDemande=='Reviser'  && dde.isAccepted == true && dde.isModified == false">Verifier</span>
+                        <span class="badge badge-pill badge-danger" *ngIf="dde.stateDemande=='Reviser'  && dde.isAccepted == false && dde.isModified == true">A Reviser</span>
+                        <span class="badge badge-pill badge-danger" *ngIf="dde.stateDemande=='Reviser'  && dde.isAccepted == false && dde.isModified == false">En attente de Revision</span>
+
+                            <span class="badge badge-pill badge-success"  *ngIf="dde.stateDemande=='Cloturer'">Cloturer</span>
+                          </td>
+                      </tr>
+
+                  </tbody>
+
+              </table>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+
+          <div class="alert alert-secondary mx-auto text-center mt-5 col-md-6" role="alert"
+              *ngIf="serviceDemandeState.HistoriqueStateDemande.length==0">
+              Aucun Enregistrement à Afficher
+          </div>
+
+
+  
+      
+
+
+          

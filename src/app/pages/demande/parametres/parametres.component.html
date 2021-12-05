@@ -1,0 +1,263 @@
+<!-- <body class="my-login-page">
+  <app-page-layout></app-page-layout>
+  <div class="content-wrapper">
+    <div class="row mb-2">
+      &nbsp; &nbsp;
+      <div class="col-sm-6">
+        <h3 class="m-0">PARAMETRES DEMANDE</h3><br>
+      </div><!-- /.col -->
+
+      <section class="container-fluid">
+
+        <div class="container-fluid">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+
+                <div class="card card-info">
+                  <div class="card-header">
+                    <h3 class="card-title">LISTE DES CATEGORIES</h3>
+                  </div>
+                  <br>
+                  <div class="right">
+                    <button type="button" class="btn btn-primary" (click)="open(content)"> + Ajouter </button>
+                  </div>
+                  <br>
+                  <table class="table">
+                    <thead class="table-primary ">
+                      <tr>
+                        <!-- <th>Num</th> -->
+                        <th>#</th>
+                        <th>Libelle</th>
+                         <th>Actions</th>
+                         <!-- <th>index</th> -->
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr  *ngFor="let categorie of categories | paginate: { itemsPerPage: 5,currentPage: s}">
+                        
+                        <!-- let index = index; -->
+                        <!-- <td>{{index+1}}</td>  -->
+                        <td>{{categorie.categorieId}}</td>
+                         <td>{{categorie.typeCat}}</td>
+
+                        <td>
+
+                          <div _ngcontent-hba-c81="" class="tools">
+                            <i _ngcontent-hba-c81=""  style="    color: #0104ca;"  class="fas fa-edit"></i>
+                            <i _ngcontent-hba-c81="" class="fas fa-trash-o"></i>
+                            <button  style="    color: #ca0101;"  class="btn btn-sm" type="button" rel="tooltip"
+                            (click)="openDel(contentDelete, categorie)">
+                            <!-- <i class="far fa-trash-alt"></i> -->
+                            <mat-icon>delete_outline</mat-icon>
+
+                            </button>
+                        </div>
+                       
+                        
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                  <pagination-controls (pageChange)="s  "></pagination-controls>
+                  <div class="card-body">
+                    <div class="form-group">
+
+                      <br>
+
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- /.col (left) -->
+              <div class="col-md-6">
+                <div class="card card-info">
+
+                  <div class="card-header">
+                    <h3 class="card-title">LISTE DES OBJETS</h3>
+                  </div>
+                  <br>
+                  <div class="right">
+                    <button type="button" class="btn btn-primary" (click)="open(content1)"> + Ajouter </button>
+                  </div>
+                  <br>
+                  <table class="table">
+                    <thead class="table-primary ">
+                      <tr>
+                        <!-- <th>Numero</th> -->
+                        <th>#</th>
+                        <th>Designation</th>
+                        <th>Actions</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let mode of modes | paginate: { itemsPerPage: 5,currentPage: p}">
+                        <!-- <td>{{index+1}}</td> -->
+                        <td>{{mode.modeId}}</td>
+                        <td>{{mode.designation}}</td>
+                        <td>
+                          <div _ngcontent-hba-c81="" class="tools"><i _ngcontent-hba-c81=""  style="    color: #0104ca;" class="fas fa-edit"></i><i _ngcontent-hba-c81="" class="fas fa-trash-o"></i>
+                            <button style="    color: #ca0101;" type="button" class="btn btn-sm" rel="tooltip" (click)="openDelete(contentDelete, mode)">
+                              <mat-icon>delete_outline</mat-icon>  </button>
+                        </div>
+                          
+                        </td>
+
+                      </tr>
+
+                    </tbody>
+                  </table>
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  <div class="card-body">
+                    <div class="form-group">
+
+                      <br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+              <!-- /.col (right) -->
+
+
+            </div>
+          </form>
+
+        </div>
+      </section>
+    <!--</div>-->
+ <!--</div>-->
+<!--</body>-->
+
+<!-- Add Modal Categorie -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nouvelle catégorie</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <!-- <div class="form-group">
+          <label for="categorieId">IdCategorie</label>
+          <div class="input-group">
+        </div>
+        </div> -->
+      <div class="form-group">
+        <label for="typeCat">TypeCategorie</label>
+        <div class="input-group">
+          <input id="typeCat" name="typeCat" class="form-control" ngModel>
+        </div>
+      </div>
+
+      <div class="border text-center">
+        <button data-dismiss="modal" class="btn btn-info">Sauvegarder</button>
+      </div>
+    </form>
+
+  </div>
+
+  <!-- <div class="modal-footer">
+        
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div> -->
+</ng-template>
+
+
+
+<!-- Add Modal Mode -->
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ajouter un Objet</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSave(f)" novalidate>
+
+      <!-- <div class="form-group">
+        <label for="modeId">IdMode</label>
+        <div class="input-group">
+        </div>
+      </div> -->
+      <div class="form-group">
+        <label for="designation">Designation</label>
+        <div class="input-group">
+          <input id="designation" name="designation" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="border text-center">
+        <button data-dismiss="modal" class="btn btn-info">Sauvegarder</button>
+      </div>
+
+    </form>
+
+  </div>
+
+</ng-template>
+
+<!-- Delete Modal Categorie -->
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to delete this record.</h2>
+    <div class="border text-center">
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDel()">Yes, Delete!</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
+
+
+<!-- Delete Modal Mode -->
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to delete this record.</h2>
+    <div class="border text-center">
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template> -->

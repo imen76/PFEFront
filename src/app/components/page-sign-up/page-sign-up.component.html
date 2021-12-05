@@ -1,0 +1,118 @@
+<body class="my-login-page">
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="brand">
+                        <img src="../../../assets/logoPolinaGroupe.png" alt="bootstrap 4 login page">
+                    </div>
+                    <div class="card fat" style="background-color: #ffffffa6 !important;">
+                        <div class="card-body">
+                            <h4 class="card-title">Register</h4>
+                            <form [formGroup]="form" (ngSubmit)="clicksub()">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input formControlName="name" id="name" type="text" class="form-control" name="name" required autofocus>
+                                    <small *ngIf="exformFunction.name.invalid && exformFunction.name.touched" class="text-danger">
+										What's your name?
+									</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">E-Mail Address</label>
+                                    <input formControlName="email" id="email" type="email" class="form-control" name="email" required>
+                                    <small *ngIf="exformFunction.email.invalid && exformFunction.email.touched" class="text-danger">
+										Your email is invalid
+									</small>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">CIN:</label>
+                                    <input formControlName="cin" type="text" class="form-control">
+                                    <small *ngIf="exformFunction.cin.invalid && exformFunction.cin.touched" class="text-danger">Check the CIN number </small>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Phone:</label>
+                                    <input formControlName="phone" type="text" class="form-control">
+                                    <small *ngIf="exformFunction.phone.invalid && exformFunction.phone.touched" class="text-danger">Phone no is Required(minimum length 10,numbers are only
+										allowed)</small>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Date of Birth:</label>
+                                    <input formControlName="date" type="date" class="form-control">
+                                    <small *ngIf="exformFunction.date.invalid && exformFunction.date.touched" class="text-danger">Date is Required</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-form-label">Image Profile:</label>
+                                    <div class="form-group">
+                                        <input formControlName="file" id="file" type="file" class="form-control" (change)="onFileChange($event)">
+                                        <small *ngIf="exformFunction.file.invalid && exformFunction.file.touched" class="text-danger">You Image is Required</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Password</label>
+                                    <div>
+                                        <input type="password" formControlName="password" class="form-control" [type]="hide ? 'password':'text'" [ngClass]="{ 'is-invalid': submitted && exformFunction.password.errors }" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <i class="material-icons" matSuffix (click)="hide = !hide">
+											{{hide ? 'visibility':'visibility_off'}}
+										</i>
+                                    </div>
+
+                                    <div *ngIf="submitted && exformFunction.password.errors" class="text-danger">
+                                        <small *ngIf="exformFunction.password.errors.required" class="text-danger">Password is required</small>
+                                        <small *ngIf="exformFunction.password.errors.minlength" class="text-danger">Password must be at least 6 characters</small>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <div>
+                                        <input type="password" formControlName="confirmPassword" class="form-control" [type]="hideConf ? 'password':'text'" [ngClass]="{ 'is-invalid': submitted && exformFunction.confirmPassword.errors }" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <i class="material-icons" matSuffix (click)="hideConf = !hideConf">
+											{{hideConf ? 'visibility':'visibility_off'}}
+										</i>
+                                    </div>
+
+
+                                    <div *ngIf="submitted && exformFunction.confirmPassword.errors" class="text-danger">
+                                        <small *ngIf="exformFunction.confirmPassword.errors.required" class="text-danger">Confirm Password is required</small>
+                                        <small *ngIf="exformFunction.confirmPassword.errors.mustMatch" class="text-danger">Passwords must match</small>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-checkbox custom-control">
+                                        <input formControlName="checkbox" type="checkbox" name="agree" id="agree" class="custom-control-input" required="">
+                                        <label for="agree" class="custom-control-label">I
+											agree to the <a href="#">Terms
+												and Conditions</a></label>
+
+                                        <small *ngIf="exformFunction.checkbox.invalid && exformFunction.checkbox.touched" class="text-danger">
+											You must agree with our Terms and Conditions
+										</small>
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-0">
+                                    <button type="submit" class="btn btn-primary">
+										Register
+									</button>
+                                </div>
+                                <div class="mt-4 text-center">
+                                    Already have an account? <a [routerLink]="['/PageSignIn']" routerLinkActive="active">Login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        Copyright &copy; 2021 &mdash; Poulina Group
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,96 @@
+<body class="my-login-page">
+    <app-page-layout></app-page-layout>
+    <div class="content-wrapper">
+        <div class="card card-info">
+
+
+            <mat-toolbar color="accent"
+                style=" text-align: center; box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);">
+                <div style="width: -webkit-fill-available;">
+                    <p> Créer un Utilisateur</p>
+                </div>
+            </mat-toolbar>
+            <br><br>
+            <mat-card-content
+                style="padding-right:10px;  padding-left: 10px;padding-bottom: 10px;height: -webkit-fill-available;">
+                <form [formGroup]="form" (ngSubmit)="clicksub()">
+                    <mat-form-field appearance="outline" class="form-control" style="display: contents;">
+                        <mat-label style="font-size: 13px;">Nom*</mat-label>
+                        <input formControlName="nom" matTooltip="Saisir nom employe" matInput autocomplete="off"
+                            placeholder="Nom employe...">
+                        <div *ngIf="exformFunction.nom.invalid && exformFunction.nom.touched" class="text-danger">
+                           
+                        </div>
+                    </mat-form-field>
+                    <mat-error>
+                        <!--<span
+                            *ngIf="!employeeForm.get('FirstName').value && employeeForm.get('FirstName').touched"></span>-->
+                    </mat-error>
+                    <mat-form-field appearance="outline" class="form-control" style="display: contents;">
+                        <mat-label style="font-size: 13px;">Prénom*</mat-label>
+                        <input formControlName="prenom" matTooltip="Saisir prenom employe" matInput
+                            placeholder="Prenom employe..." autocomplete="off">
+
+                        <div *ngIf="exformFunction.prenom.invalid && exformFunction.prenom.touched" class="text-danger">
+                            Champ requis !!
+                        </div>
+                    </mat-form-field>
+                    <mat-error>
+                        <!--<span
+                            *ngIf="!employeeForm.get('LastName').value && employeeForm.get('LastName').touched"></span>-->
+                    </mat-error>
+                    <mat-form-field appearance="outline" class="form-control" style="display: contents;">
+                        <mat-label style="font-size: 13px;">Date de naissance</mat-label>
+                        <input matInput [matDatepicker]="picker" matTooltip="Date de Naissance"
+                            formControlName="dateNaissance" placeholder="Date de Naissance ..." autocomplete="off">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        
+                    </mat-form-field>
+                    <mat-error>
+                        <span
+                            *ngIf="!exformFunction.dateNaissance.value && exformFunction.dateNaissance.touched"></span>
+                    </mat-error>
+                    <mat-form-field appearance="outline" class="form-control" style="display: contents;">
+                        <mat-label style="font-size: 13px;">Email</mat-label>
+                        <input formControlName="email" matTooltip="Enter EmailId" matInput placeholder="Email ..."
+                            autocomplete="off">
+                        <div *ngIf="exformFunction.email.invalid && exformFunction.email.touched" class="text-danger">
+                            email est invalide !!
+                        </div>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="form-control" style="display: contents;">
+                        <mat-label style="font-size: 13px;">Password</mat-label>
+                        <input formControlName="password" matTooltip="Enter password" matInput placeholder="Password ..."
+                        type="password"  autocomplete="off">
+                        <div *ngIf="exformFunction.password.invalid && exformFunction.password.touched" class="text-danger">
+                            Password  invalide !!
+                        </div>
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="outline" class="form-control" style="display: contents;">
+                        <mat-label style="font-size: 13px;">Role</mat-label>
+                        <mat-select formControlName="role" [(value)]="selected">
+                    
+                          <mat-option *ngFor="let role of roles" [value]="role.value">
+                            {{role.text}}
+                          </mat-option>
+                        </mat-select>
+                        <div *ngIf="exformFunction.role.invalid && exformFunction.role.touched" class="text-danger">
+                            Role est invalide !!
+                        </div>
+                    </mat-form-field>
+
+                    <button style="width: -webkit-fill-available;" type="submit" mat-raised-button color="accent"
+                        matTooltip="Submit">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+                </form>
+
+
+
+            </mat-card-content>
+        </div>
+    </div>
+</body>

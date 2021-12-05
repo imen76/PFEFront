@@ -1,0 +1,264 @@
+<body class="my-login-page">
+  <app-page-layout></app-page-layout>
+
+  <div class="content-wrapper">
+    <div class="container center_div">
+
+      <div class="row col-md-12">
+
+        <div class="card card-info mt-5">
+          <mat-toolbar color="accent"
+            style="text-align: center !important; box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);">
+            <div style="width: -webkit-fill-available;">
+              <h3>Créer une nouvelle demande</h3>
+            </div>
+          </mat-toolbar>
+          <!-- ss<pre>{{addDemandeForm.value | json}}</pre> -->
+          <form [formGroup]="demandeService.addDemandeForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <!-- <div class="form-group">
+                      <label>Type du demande</label>
+                      <select class="form-control">
+                              <option value="" disabled selected hidden>Choisir type demande
+                              </option>
+                              <option>Achat</option>
+                              <option>Vente</option>
+                              <option>Location</option>
+
+                          </select>
+                  </div> -->
+
+                  <div class="row">
+                    <div class="col-3">
+                      <label>Date Demande</label>
+                      <input type="date" formControlName="DateDemande" class="form-control" id="DateDemande"
+                        placeholder="Saisir date demande" name="dateDemande" required>
+                    </div>
+                    <div class="col-9">
+                      <label>Demande</label>
+                      <input type="text" formControlName="labelDemande" class="form-control" id="labelDemande"
+                        placeholder="Saisir type demande" name="labelDemande" required minlength="14" autocomplete="off">
+                    </div>
+                 
+                  </div>
+
+              <!-- <div class="form-group">
+                <label>Demande</label>
+                <input type="text" formControlName="labelDemande" class="form-control" id="labelDemande"
+                  placeholder="Saisir type demande" name="labelDemande" required minlength="14" autocomplete="off">
+              </div>
+              <br> -->
+
+              <div class="row mt-3">
+
+                <div class="col-3">
+                  <label >Montant</label>
+                  <input type="number" formControlName="Montant" class="form-control" id="Montant" 
+                  placeholder="Saisir Montant" name="Montant"  autocomplete="off">
+                </div>
+                <div class="col">
+                  <label>MODES</label>
+
+                  <ng-select [items]="modes" bindLabel="designation" bindValue="modeId" [multiple]="false"
+                    placeholder="Select Mode" formControlName="FKMode">
+                  </ng-select>
+                </div>
+                <div class="col">
+                  <label class="col">CATEGORIES</label>
+
+
+                  <ng-select [items]="categories" bindLabel="typeCat" bindValue="categorieId" [multiple]="false"
+                    placeholder="Select Categorie" formControlName="FKCategorie">
+                  </ng-select>
+                </div>
+              </div>
+
+
+
+              <!-- <div class="form-group mt-2">
+                <label>Date Demande</label>
+                <input type="date" formControlName="DateDemande" class="form-control" id="DateDemande"
+                  placeholder="Saisir date demande" name="dateDemande" required>
+              </div> -->
+         
+
+              <div class="form-group mt-3">
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label >Filiale</label>
+                    <input type="text" class="form-control" [value]="serviceUser.user.labelSubsidary"  readonly>
+                
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label >Client</label>
+                    <input type="text" formControlName="Partie2" class="form-control" id="Partie2" minlength="2"
+                    placeholder="Saisir Client" name="Partie2"  autocomplete="off">
+                 
+                  </div>
+            
+                </div>
+<!-- 
+                <div class="col-auto">
+                  <label>Client</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"> <b>{{serviceUser.user.labelSubsidary}}</b></div>
+                    </div>
+                    <input type="text" formControlName="Partie2" class="form-control" id="Partie2" minlength="2"
+                    placeholder="Saisir Client" name="Partie2"  autocomplete="off">
+                  </div>
+                </div> -->
+
+                <div class="form-group mt-3">
+                  <label>Adresse</label>
+                  <input formControlName="Lieu" type="text" class="form-control" id="Lieu" placeholder="Saisir Adresse"
+                    name="Lieu" required minlength="2" autocomplete="off">
+                </div>
+
+                <div class="form-group mt-3">
+                  <label>Motif Demande</label>
+                  <input formControlName="Comment" type="text" class="form-control" id="Comment" placeholder="Saisir Commentaire"
+                    name="Comment" required minlength="2" autocomplete="off">
+                </div>
+              
+                <!-- <input formControlName="Partie1" type="text" class="form-control" placeholder="Saisir Partie 1" required
+                  minlength="2" autocomplete="off"> -->
+              </div>
+              <!-- <div class="form-group">
+                <label>Client</label>
+                <input type="text" formControlName="Partie1" class="form-control" id="Partie1"
+                  placeholder="Saisir partie1" name="Partie1">
+              </div> -->
+              <!-- <div class="form-group">
+                <label>Partie 2</label>
+                <input type="text" formControlName="Partie2" class="form-control" id="Partie2" minlength="2"
+                  placeholder="Saisir partie2" name="Partie2">
+              </div> -->
+              <!-- <div class="form-group">
+                <label>TypeContact</label>
+                <input type="text" formControlName="TypeContact" class="form-control" id="TypeContact"
+                  placeholder="Saisir " name="TypeContact">
+              </div>
+              <div class="form-group">
+                <label>PrixTotal</label>
+                <input type="text" formControlName="PrixTotal" class="form-control" id="PrixTotal"
+                  placeholder="Saisir prix" name="PrixTotal">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" formControlName="Description" class="form-control" id="Description"
+                  placeholder="Ajouter Description" name="Description">
+              </div> -->
+
+
+
+
+              <!--Fournisseur-->
+              <!-- <div class="btn-group me-2">
+                <button type="button" class="btn btn-block btn-warning " data-toggle="modal" data-target="#ajoutModal">
+                  Fournisseur</button>
+              </div> -->
+
+              <!-- <div class="modal fade" id="ajoutModal" tabindex="-1" role="dialog" aria-labelledby="ajouterModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="ajouterModalLabel">Chercher un fournisseur</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Matricule fournisseur"
+                              aria-label="Code Filiale">
+                          </div>
+
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Code fournisseur"
+                              aria-label="Code Filiale">
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Nom fournisseur"
+                              aria-label="Nom Filiale">
+                          </div>
+
+                          <input type="search" class="form-control rounded" placeholder="Chercher" aria-label="Search"
+                            aria-describedby="search-addon" />
+                          <span class="input-group-text border-0" id="search-addon">
+                            <i class="fas fa-search"></i>
+                          </span>
+                        </div>
+                        <br>
+                        <div>
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">Fournisseur</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col">N° Tel</th>
+                                <th scope="col">Opération</th>
+                              </tr>
+                            </thead>
+                            <tbody> -->
+              <!-- <tr>
+                                 <th scope="row"></th>  -->
+              <tr *ngFor="">
+                <!-- <td>{{a.numCIN}}</td> 
+                                                  <td>{{a.nom}}</td> 
+                                                  <td>{{a.prenom}}</td>  
+                                <td class="td-actions text-left">
+                                  <button type="button" class="btn btn-outline-dark" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    <i class="fas fa-plus-circle"></i>
+                                  </button>
+                                </td>
+
+                              </tr>
+
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+
+
+            </div>
+            <!-- <div class="float-center">
+              <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">Valider</button>
+              <button type="submit" class="btn btn-outline-dark">Enregistrer brouillon</button>
+            </div> -->
+            <br>
+            <div class="text-center">
+
+              <button type="submit" class="btn btn-primary">Valider</button>&nbsp;
+              <button type="button" class="btn btn-primary" (click)="onSubmitbrouillon()">Enregistrer brouillon</button>
+
+            </div>
+            <!-- <pre>{{addDemandeForm.value | json}}</pre> -->
+            <br>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+
+<!-- <ng-select 
+                [items]="cities"
+                placeholder="Select city"
+                bindValue="categorieId"
+                bindLabel="Categorie
+                formControlName="FKCategorie">
+              </ng-select> -->

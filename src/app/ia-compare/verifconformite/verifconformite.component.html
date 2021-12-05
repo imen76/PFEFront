@@ -1,0 +1,133 @@
+<body class="my-login-page">
+    <app-page-layout></app-page-layout>
+    <div class="content-wrapper">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3 class="m-0">Vérifier Contrat</h3><br>
+            </div><!-- /.col -->
+
+            <section class="container-fluid">
+
+                <div class="container-fluid">
+                    <form [formGroup]="formCheckDiffernce" (ngSubmit)="clicksubMethode()">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="card card-danger">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Poulina Holding Contrats de base</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="idContratPGH">Télécharger contract à partir de la Base de
+                                                Données:</label>
+
+                                            <input formControlName="idContratPGH" id="idContratPGH" type="text"
+                                                id="idContratPGH" name="idContratPGH" class="form-control"
+                                                placeholder="Saisir Id Contrat" #idContract>
+                                            <br>
+                                            <button type="button" (click)="onUploadContrat()"
+                                                class="btn btn-primary col start">
+                                                <i class="fas fa-upload"></i>
+                                                <span> lancer le Téléchargement</span>
+                                            </button>
+                                            <hr>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <label>Télécharger contract à partir du bureau</label>
+                                            <input id="file" type="file" class="form-control"
+                                                (change)="onFileChange($event)">
+                                            <img [src]="imageSource" height="700">
+
+                                            <ng-container *ngIf="visible1">
+                                                <label for="idContartDesktop">Donner un ID pour contrat:</label>
+    
+                                                <input formControlName="idContartDesktop" id="idContartDesktop" type="text"
+                                                    id="idContartDesktop" name="idContartDesktop" class="form-control"
+                                                    placeholder="Saisir Id Contrat Desktop" #idContract>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- /.col (left) -->
+                            <div class="col-md-6">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Contrats Rendus Client</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Date -->
+                                        <div class="form-group">
+                                            <label for="nomClient">Nom Client:</label>
+                                            <input formControlName="nomClient" type="text" id="nomClient" class="form-control"
+                                                placeholder="Saisir Nom du Client" #contractClientName required
+                                                autofocus>
+                                            <br>
+                                            <button type="button" (click)="onUploadImageClient()"
+                                                class="btn btn-primary col start">
+                                                <i class="fas fa-upload"></i>
+                                                <span> lancer le Téléchargement</span>
+                                            </button>
+                                            <hr>
+                                            <label>Télécharger contract à partir du bureau</label>
+                                            <input id="file" type="file" class="form-control"
+                                                (change)="onFileChangeClient($event)">
+                                            <img [src]="imageSourceClient" height="700">
+                                            <ng-container *ngIf="visible2">
+                                                <label for="Nom Client">Donner le nom du client:</label>
+    
+                                                <input formControlName="nomClientDesktop" id="idContartDesktop" type="text"
+                                                    id="idContartDesktop" name="idContartDesktop" class="form-control"
+                                                    placeholder="Saisir Id Contrat Desktop" #idContract>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <div class="col-md-6">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Le Résultat de Comparaison</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Date -->
+                                        <div class="form-group">
+                                            <img [src]="imageResult" height="700">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col (right) -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <a (click)="saveTheResultImage()" class="btn btn-success">Enregistrer la résultat</a>
+                                    <button type="button" (click)="clicksubMethode()"
+                                        class="btn btn-success float-right">
+                                        Lancer la Comparaison
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,170 @@
+<body class="my-login-page">
+    <app-page-layout></app-page-layout>
+    <div class="content-wrapper">
+
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h2 class="m-0">Créer Contrat</h2>
+                <p>Pour préparer votre document,veuillez remplir tous les champs du formulaire suivant</p> 
+                 <p> Pour générer votre document veuillez appuyer sur suivant</p>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+
+                    <li class="breadcrumb-item active"><a [routerLink]="['/ListeDemandes']">Contrats</a></li>
+                </ol>
+            </div>
+            <!-- /.col -->
+
+            <form [formGroup]="formNewDemande" (ngSubmit)="clicksub()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <br>
+                        <br>
+                        <br>
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Géneralités</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                        title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body" style="display: block;">
+                                <div class="form-group">
+                                    <label for="inputIdContrat"> Identification du Contrat</label>
+                                    <input formControlName="inputIdContrat" type="text" id="inputIdContrat"
+                                        class="form-control" placeholder="XXXXX-00000" required autofocus>
+                                    <small
+                                        *ngIf="exformFunction.inputIdContrat.invalid && exformFunction.inputIdContrat.touched"
+                                        class="text-danger">
+                                        contract ID est obligatoire
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nomClt">Nom du Client </label>
+                                    <input formControlName="nomClt" type="text" id="nomClt" class="form-control"
+                                        placeholder="Saisir nom du client" required autofocus>
+                                    <small *ngIf="exformFunction.nomClt.invalid && exformFunction.nomClt.touched"
+                                        class="text-danger">
+                                        Le nom du client est obligatoire
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date de Creation:</label>
+                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+
+                                        <input formControlName="date" class="form-control" type="date" required
+                                            autofocus>
+
+                                    </div>
+                                    <small *ngIf="exformFunction.date.invalid && exformFunction.date.touched"
+                                        class="text-danger">Date de creation est obligatoire</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputTypeContract">Type Contrat</label>
+                                    <select formControlName="inputTypeContract" id="inputTypeContract"
+                                        class="form-control custom-select" required autofocus>
+                                        <option selected="" disabled="">No one selected</option>
+                                        <option selected="">Achat</option>
+                                        <option>Vente</option>
+                                        <option>Location</option>
+                                    </select>
+                                    <small
+                                        *ngIf="exformFunction.inputTypeContract.invalid && exformFunction.inputTypeContract.touched"
+                                        class="text-danger">Choix obligatoire</small>
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>      
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Détails du contrat</h3>
+    
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputNatMar">Nom Acheteur</label>
+                                    <input formControlName="nomAchet" type="text" name="nomAchet" id="nomAchet"
+                                        class="form-control" placeholder="Saisir le nom d'acheteur" required autofocus>
+                                    <small *ngIf="exformFunction.nomAchet.invalid && exformFunction.nomAchet.touched"
+                                        class="text-danger">Le nom de l'acheteur est obligatoire</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputNatMar">Nom Vendeur</label>
+                                    <input formControlName="nomVende" type="text" name="nomVende" id="nomVende"
+                                        class="form-control" placeholder="Saisir le nom du vendeur" required autofocus>
+                                    <small *ngIf="exformFunction.nomVende.invalid && exformFunction.nomVende.touched"
+                                        class="text-danger">Le nom de vendeur est obligatoire</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="objetContrat">Objet du contrat</label>
+                                    <input formControlName="objetContrat" type="text" name="objetContrat" id="objetContrat"
+                                        class="form-control" placeholder="Saisir l'objet du contrat" required autofocus>
+                                    <small
+                                        *ngIf="exformFunction.objetContrat.invalid && exformFunction.objetContrat.touched"
+                                        class="text-danger">L'objet du contrat est obligatoire</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prixAV">Valeur du contrat</label>
+                                    <input formControlName="prixAV" type="text" name="prixAV" id="prixAV"
+                                        class="form-control" placeholder="Saisir la valeur monétaire du contrat" required autofocus>
+                                    <small *ngIf="exformFunction.prixAV.invalid && exformFunction.prixAV.touched"
+                                        class="text-danger">Le prix est obligatoire</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="conf">Confidentialite</label>
+                                    <input formControlName="conf" type="text" name="conf" id="conf" class="form-control"
+                                        placeholder="Confidentialite..." required autofocus>
+                                    <small *ngIf="exformFunction.conf.invalid && exformFunction.conf.touched"
+                                        class="text-danger">Confidentialite est obligatoire</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Modalité de paiement</label>
+                                    <select formControlName="inputPaiement" id="inputPaiement"
+                                        class="form-control custom-select" required autofocus>
+                                        <option selected="" disabled=""></option>
+                                        <option>Espèce</option>
+                                        <option>Chèque</option>
+                                        <option>Virement</option>
+                                        <option>Carte Bancaire</option>
+                                        <option>Traite</option>
+                                    </select>
+                                    <small
+                                        *ngIf="exformFunction.inputPaiement.invalid && exformFunction.inputPaiement.touched"
+                                        class="text-danger">Le mode de paiement est obligatoire</small>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+    
+    
+                        </div>    
+                    </div>
+
+
+
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="#" class="btn btn-secondary">Cancel</a>
+                            <input type="submit" value="Sauvegarder" class="btn btn-success float-right">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.container-fluid -->
+    </div>
+</body>

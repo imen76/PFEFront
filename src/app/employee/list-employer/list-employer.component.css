@@ -1,0 +1,26 @@
+
+
+
+/* 
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
+    max-width: -webkit-fill-available;
+    padding-left: 258px;
+} */
+
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+
+div.container{
+    margin: 0px 40px;
+}
+.mb-2{
+    margin-left: 5pt;
+}
+

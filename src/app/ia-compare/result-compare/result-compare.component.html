@@ -1,0 +1,106 @@
+<body class="my-login-page">
+    <app-page-layout></app-page-layout>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
+    <br>
+    <div class="content-wrapper">
+        <div class="row mb-2">
+
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <div class="col-md-8">
+                    <div class="card card-warning">
+                        <mat-toolbar color="accent"
+                            style="text-align: center !important; box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);">
+                            <div style="width: -webkit-fill-available;">
+                                <h3>Résultat de Comparaison</h3>
+                            </div>
+                        </mat-toolbar>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id Contrat</th>
+                                        <th>Nom Client</th>
+                                        <th>Date de création</th>
+                                        <th>Le contrat</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let lst of listContratValider ">
+                                        <td>{{lst[0]}}</td>
+                                        <td>{{lst[1]}}</td>
+                                        <td>{{lst[2]}}</td>
+                                        <td>
+                                            <a (click)="getImageValiderFromDB(lst[0])"type="button"  data-toggle="modal" data-target="#myModal">
+                                        <td class="fa fa-image">
+                                        </td>
+                                        </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Résultat de comparaison</h5>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-8">
+                            <div class="form-group">
+                                <img src="data:image/gif;base64,{{contartValiderResult}}" height="600">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</body>

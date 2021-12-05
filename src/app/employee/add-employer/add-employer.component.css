@@ -1,0 +1,20 @@
+.mat-toolbar.mat-accent {
+    background: rgba(0, 191, 16, 0.71);
+    color: rgba(0, 0, 0, .87);
+}
+
+
+/* 
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
+    max-width: -webkit-fill-available;
+    padding-left: 258px;
+} */
+
+table {
+    border-collapse: collapse;
+    width: -webkit-fill-available;
+}

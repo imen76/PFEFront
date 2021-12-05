@@ -1,0 +1,165 @@
+<body class="my-login-page">
+    <app-page-layout></app-page-layout>
+    <div class="content-wrapper">
+        <!-- <input [(ngModel)] = "idContrat" (ngModelChange) = "Search()"/>
+               <ul>
+            <li *ngFor="let crt of listContratPGH | filter:idContrat">
+         
+               {{crt[0]}} 
+               
+         
+            </li>
+         </ul> -->
+         
+
+        <div class="row">
+            <div class="col-sm-6">
+          <div class="card">
+                <div class="card-body">
+                    <mat-toolbar color="accent"
+                    style="text-align: center !important; box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);">
+                    <div style="width: -webkit-fill-available;">
+                        <h3>Contrats PGH</h3>
+                    </div>
+                </mat-toolbar>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <!-- (keyup)="applyFilter($event.target.value)" -->
+                <!-- <input [(ngModel)] = "idContrat" (ngModelChange) = "Search()"/>
+                <form>
+                     <ul>
+                   <li *ngFor="let crt of listContratPGH | filter:idContrat">
+                
+                      {{crt[0]}} 
+                      
+                
+                   </li>
+                </ul>
+                </form> -->
+               
+                <mat-form-field>
+                    <input matInput  [(ngModel)] = "idContrat" (ngModelChange) = "Search()" placeholder="Filter">
+                </mat-form-field>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-icon-button aria-label="Example icon button with a delete icon" type="button"
+                    mat-raised-button color="accent" matTooltip="Delete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th >IdContrat</th>
+                            <!-- <th>TypeContrat</th> -->
+                            <th>Nom du Client</th>
+                            <th>Date de Création</th>
+                            <!-- <th>Clients</th>
+                            <th>Fournisseur</th>
+                            <th>Status</th> 
+
+                            <th class="text-right" style="padding-right: 70px;">Actions</th>
+                            -->
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let crt of listContratPGH |paginate: { itemsPerPage: 5,currentPage: p} |  filter:idContrat">
+                            <td>{{crt[0]}}</td>
+                            <td>{{crt[1]}}</td>
+                            <td>{{crt[2]| date: 'dd-MM-yyyy'}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <!--<mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>-->
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                    <mat-toolbar color="accent"
+                    style="text-align: center !important; box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);">
+                    <div style="width: -webkit-fill-available;">
+                        <h3>Contrats clients</h3>
+                    </div>
+                 </mat-toolbar>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+              
+                <!-- (keyup)="applyFilter($event.target.value)" -->
+                <mat-form-field>
+                    <input matInput [(ngModel)] = "nomClient" (ngModelChange) = "Search()" placeholder="Filter">
+                </mat-form-field>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-icon-button aria-label="Example icon button with a delete icon" type="button"
+                    mat-raised-button color="accent" matTooltip="Delete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+        
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>IdContrat</th>
+                            <!-- <th>TypeContrat</th> -->
+                            <th>Nom du Client</th>
+                            <th>Date de Création</th>
+                            <th>Le contrat</th>
+                        <!-- <th>Fournisseur</th>
+                        <th>Status</th> -->
+
+                            <!---->
+                        </tr>
+                    </thead>
+               
+                    <tbody>
+                        <tr *ngFor="let crt of listContratClient |paginate: { itemsPerPage: 5,currentPage: p} |  filter:nomClient">
+                        
+
+                             <td>{{crt[0]}}</td>
+                            <td>{{crt[1]}}</td>
+                            <td>{{crt[2]| date: 'dd-MM-yyyy'}}</td>
+                             <!-- <td>
+                                            <a (click)="getImageValiderFromDB(crt[0])"type="button"  data-toggle="modal" data-target="#myModal">
+                                        <td class="fa fa-image">
+                                        </td>
+                                        </a>
+                             </td> -->
+
+                        </tr>
+                    </tbody>
+                </table>
+                 <!--<mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>-->
+                </div>
+              </div>
+            </div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+
+
+          <!-- Modal -->
+
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Résultat de comparaison</h5>
+
+                    </div>
+                    <!-- <div class="modal-body">
+                        <div class="mb-8">
+                            <div class="form-group">
+                                <img src="data:image/gif;base64,{{contartValiderResult}}" height="600">
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+
+</body>

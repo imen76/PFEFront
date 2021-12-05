@@ -1,0 +1,89 @@
+<body class="my-login-page">
+    <app-page-layout></app-page-layout>
+    <div class="content-wrapper">
+        <div class="row mb-2">
+
+        
+            <div class="card card-info mt-5">
+    
+      
+                <div class="card-header ui-sortable-handle" style="cursor: move;">
+                  <h3 class="card-title">
+                    <i class="far fa-file-alt"></i>
+                    Liste Demandes à Reviser
+                  </h3>
+           
+               
+              </div>
+
+              </div>
+   
+            <div class="card-body table-responsive mt-3" *ngIf="serviceDemandeState.listeDemandeStateReviser.length>0">
+                <table class="table table-striped table-bordered" style="margin-left: -5px;">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Demande </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Date</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Montant</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Filiale</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Client</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Categorie</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Mode</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Gérer Par</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Commentaire</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Creer Commentaire</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Action</th>
+                    
+                      
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let dde of serviceDemandeState.listeDemandeStateReviser   |paginate: { itemsPerPage: 5,currentPage: p}">
+                            <td>{{dde.labelDemande}}</td>
+                            <td>{{dde.montant}}</td>
+                            <td>{{dde.dateDemande | date: "dd/MM/yyyy"}}</td>
+                      
+                            <td>{{dde.partie1}}</td>
+
+                            <td>{{dde.partie2}}</td>
+                            <td>{{dde.typeCat}}</td>
+                            <td>{{dde.designation}}</td>
+                            <td>{{dde.fullName}}</td>
+                            <td>{{dde.comment}}</td>
+                            <td >
+                                <form [formGroup]="serviceDemandeState.formComment">
+                                    <div class="form-group mt-3">
+
+                                        <textarea formControlName="comment" type="text" class="form-control" id="Comment"
+                                            placeholder="Saisir Commentaire" name="Comment" required minlength="2"
+                                            autocomplete="off"></textarea>
+                                    </div>
+                                </form>
+                            </td>
+
+                            <td >
+                                <button type="button" (click)="onRevise(dde)" class="btn btn-outline-danger"
+                                *ngIf="serviceUser.user.libelleRole != 'Demandeur' "  >Reviser</button>
+                                <button type="button" (click)="onAccept(dde)" class="btn btn-success float-right"
+                              >Renvoyer</button>
+
+                            </td>
+
+                
+
+                        </tr>
+                      
+                    </tbody>
+            
+                </table>
+
+             
+</div>
+                 <div class="alert alert-secondary mx-auto text-center mt-5 col-md-6" role="alert" *ngIf="serviceDemandeState.listeDemandeStateReviser.length==0">
+                  Aucune Liste à Afficher
+                  </div>
+
+ 
+   
